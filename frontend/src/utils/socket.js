@@ -9,7 +9,9 @@ export function connectWebSocket(onConnectedCallback, onMessageCallback, options
     return;
   }
 
-  socket = new WebSocket('ws://localhost:8080');
+  const scheme = window.location.protocol === 'https:' ? 'wss' : 'ws';
+  const host = window.location.host;
+  socket = new WebSocket(`${scheme}://${host}/ws`);
   console.log('Connecting to WebSocket...');
 
   window.socket = socket;
