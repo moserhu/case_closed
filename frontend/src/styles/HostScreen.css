@@ -48,6 +48,10 @@
   text-align: center;
 }
 
+.bracket-panel {
+  overflow: hidden;
+}
+
 .panel-title {
   margin: 0 0 12px;
   font-size: 20px;

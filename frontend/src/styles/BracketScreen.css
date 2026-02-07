@@ -1,6 +1,33 @@
 .bracket-container {
   text-align: center;
   margin-top: 20px;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  max-height: 70vh;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(78, 161, 255, 0.55) rgba(12, 16, 26, 0.6);
+}
+
+.bracket-container::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+.bracket-container::-webkit-scrollbar-track {
+  background: rgba(12, 16, 26, 0.6);
+  border-radius: 999px;
+}
+
+.bracket-container::-webkit-scrollbar-thumb {
+  background: rgba(78, 161, 255, 0.55);
+  border-radius: 999px;
+  border: 2px solid rgba(12, 16, 26, 0.6);
+}
+
+.bracket-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(78, 161, 255, 0.75);
 }
 
 .champion-wrap {
@@ -39,6 +66,10 @@
   gap: 32px;
   align-items: start;
   margin-top: 20px;
+  min-width: max-content;
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .side {

@@ -83,6 +83,7 @@ wss.on('connection', (socket) => {
           submittedPlayers: new Set(),
           bracket: [],
           completedBattles: new Set(),
+          battleWinners: {},
           currentBattle: null,
           phase: 'lobby',
           category: '',
@@ -172,6 +173,18 @@ wss.on('connection', (socket) => {
             action: 'player_list',
             players: getPlayerNames(room),
           }));
+
+          room.host.send(JSON.stringify({
+            action: 'host_state',
+            roomCode: data.roomCode,
+            phase: room.phase,
+            category: room.category,
+            submissions: room.submissions,
+            bracket: room.bracket,
+            battleWinners: room.battleWinners,
+            submissionEndsAt: room.submissionEndsAt,
+            playerCount: room.players.length,
+          }));
         }
 
         console.log(`Host successfully reattached to room ${data.roomCode}`);
@@ -218,6 +231,7 @@ wss.on('connection', (socket) => {
         room.submittedPlayers = new Set();
         room.bracket = [];
         room.completedBattles = new Set();
+        room.battleWinners = {};
         room.currentBattle = null;
         room.votingItems = [];
         room.submissionEndsAt = Date.now() + SUBMISSION_DURATION_MS;
@@ -523,6 +537,7 @@ wss.on('connection', (socket) => {
           const winner = votes[room.currentBattle.item1] >= votes[room.currentBattle.item2]
             ? room.currentBattle.item1
             : room.currentBattle.item2;
+          room.battleWinners[`${room.currentBattle.item1}||${room.currentBattle.item2}`] = winner;
 
           const payload = JSON.stringify({
             action: 'battle_result',

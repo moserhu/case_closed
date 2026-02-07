@@ -11,7 +11,18 @@ export default function VoteScreen() {
   const navigate = useNavigate(); // 👈 ADD THIS
 
   useEffect(() => {
-    connectWebSocket(undefined, undefined, {
+    const code = localStorage.getItem('roomCode') || '';
+    const name = localStorage.getItem('playerName') || '';
+    if (!code || !name) {
+      localStorage.removeItem('roomCode');
+      localStorage.removeItem('playerName');
+      navigate('/');
+      return;
+    }
+
+    connectWebSocket(() => {
+      sendMessage({ action: 'join_room', roomCode: code, name });
+    }, undefined, {
       onClose: () => navigate('/'),
     });
 
@@ -42,11 +53,25 @@ export default function VoteScreen() {
             setRemainingVotes(data.votesPerPlayer || 10);
             setVotingStarted(true);
           }
+          else if (data.action === 'join_ok') {
+            if (data.phase === 'submissions') {
+              navigate('/submit');
+            } else if (data.phase === 'battle') {
+              navigate('/battle');
+            } else if (data.phase === 'lobby') {
+              navigate('/lobby');
+            }
+          }
           else if (data.action === 'voting_complete') {
             console.log('Voting complete! Moving to bracket.');
             navigate('/battle');
           }
           else if (data.action === 'game_over') {
+            navigate('/');
+          }
+          else if (data.action === 'error' && data.message === 'Room not found.') {
+            localStorage.removeItem('roomCode');
+            localStorage.removeItem('playerName');
             navigate('/');
           }
           

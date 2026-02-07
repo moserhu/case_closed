@@ -38,12 +38,9 @@ export default function PlayerLobbyScreen() {
       } else if (data.action === 'error') {
         setError(data.message || 'Something went wrong.');
         if (data.message === 'Room not found.') {
-          setTimeout(() => {
-            const code = localStorage.getItem('roomCode') || '';
-            if (code) {
-              sendMessage({ action: 'join_room', roomCode: code });
-            }
-          }, 500);
+          localStorage.removeItem('roomCode');
+          localStorage.removeItem('playerName');
+          navigate('/');
         }
       }
     } catch (err) {
@@ -58,16 +55,16 @@ export default function PlayerLobbyScreen() {
     const name = localStorage.getItem('playerName') || '';
     setRoomCode(code);
 
-    if (code) {
+    if (code && name) {
       connectWebSocket(() => {
-        if (name) {
-          sendMessage({ action: 'join_room', roomCode: code, name });
-        }
+        sendMessage({ action: 'join_room', roomCode: code, name });
       }, handleSocketMessage, {
         onClose: () => navigate('/'),
       });
     } else {
-      setError('Missing room code.');
+      localStorage.removeItem('roomCode');
+      localStorage.removeItem('playerName');
+      navigate('/');
     }
   }, []);
 

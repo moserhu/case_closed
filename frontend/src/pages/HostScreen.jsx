@@ -38,6 +38,16 @@ export default function HostScreen() {
           localStorage.setItem('hostToken', data.hostToken);
           setPhase('lobby');
           setPlayerCount(data.playerCount || 0);
+        } else if (data.action === 'host_state') {
+          setPhase(data.phase || 'lobby');
+          setCategory(data.category || '');
+          setSubmissions(Array.isArray(data.submissions) ? data.submissions : []);
+          setBracket(Array.isArray(data.bracket) ? data.bracket : []);
+          setBattleWinners(data.battleWinners || {});
+          setSubmissionsOpen(data.phase === 'submissions');
+          if (typeof data.playerCount === 'number') {
+            setPlayerCount(data.playerCount);
+          }
         } else if (data.action === 'new_submission') {
           setSubmissions((prev) => [...prev, data.item]);
         } else if (data.action === 'submissions_list') {
@@ -235,7 +245,7 @@ export default function HostScreen() {
           </div>
 
           <div className="host-grid full-width">
-        <div className="panel">
+        <div className={`panel ${bracket.length > 0 ? 'bracket-panel' : ''}`}>
           {bracket.length === 0 ? (
             <>
               <h3 className="submissions-title">Submitted Items</h3>
