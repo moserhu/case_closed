@@ -1,11 +1,33 @@
 // backend/server.js
+// Single-process server:
+// - HTTP serves the built frontend from ./public
+// - WebSocket server is mounted at /ws on the same port
+
+const path = require('path');
+const http = require('http');
+const express = require('express');
+
 // Memory store for rooms
 const rooms = {};
 
 const crypto = require('crypto');
 const WebSocket = require('ws');
 
-const wss = new WebSocket.Server({ port: 8080 });
+const PORT = process.env.PORT || 8080;
+
+const app = express();
+const publicDir = path.join(__dirname, 'public');
+app.use(express.static(publicDir));
+
+// SPA fallback (serve index.html for non-file routes)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(publicDir, 'index.html'));
+});
+
+const server = http.createServer(app);
+
+// WebSocket server on the same HTTP server (path: /ws)
+const wss = new WebSocket.Server({ server, path: '/ws' });
 
 const VOTES_PER_PLAYER = 10;
 const BRACKET_SIZE = 16;
@@ -621,3 +643,7 @@ wss.on('connection', (socket) => {
 });
 
 console.log('WebSocket server running on ws://localhost:8080');
+
+server.listen(PORT, () => {
+  console.log(`case_closed listening on ${PORT} (http + ws:/ws)`);
+});
