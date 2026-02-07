@@ -1,0 +1,149 @@
+.bracket-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.champion-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 18px;
+}
+
+.champion-label {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.champion-button {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(22px, 3vw, 36px);
+  color: var(--accent-3);
+  padding: 10px 28px;
+  border-radius: 10px;
+  border: 1px solid rgba(24, 209, 123, 0.5);
+  background: rgba(24, 209, 123, 0.12);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+}
+  
+.matchups {
+  display: none;
+}
+
+.bracket-sides {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 32px;
+  align-items: start;
+  margin-top: 20px;
+}
+
+.side {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.side.left {
+  justify-content: flex-end;
+}
+
+.side.right {
+  justify-content: flex-start;
+}
+
+.side.center {
+  justify-content: center;
+}
+
+.final-round {
+  min-width: 260px;
+}
+
+.round {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 220px;
+  padding: 12px;
+  background: rgba(12, 16, 26, 0.85);
+  border-radius: 16px;
+  border: 1px solid rgba(56, 241, 255, 0.15);
+}
+
+.round h4 {
+  margin-bottom: 10px;
+  color: var(--accent);
+  font-family: 'Barlow Condensed', sans-serif;
+}
+  
+  .matchup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 12px 0;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: rgba(78, 161, 255, 0.08);
+    border: 1px solid rgba(78, 161, 255, 0.2);
+    cursor: pointer;
+  }
+
+  .matchup.resolved {
+    opacity: 0.5;
+    cursor: default;
+    filter: grayscale(0.4);
+  }
+  
+  .seed-item {
+    font-size: 16px;
+    padding: 6px 10px;
+    background-color: rgba(7, 10, 20, 0.9);
+    color: var(--text);
+    border-radius: 8px;
+    margin: 4px 0;
+    min-width: 180px;
+    border: 1px solid rgba(255, 59, 92, 0.2);
+  }
+
+  .seed-item.winner {
+    background: rgba(24, 209, 123, 0.18);
+    border-color: rgba(24, 209, 123, 0.6);
+    color: #e8fff5;
+    box-shadow: 0 0 14px rgba(24, 209, 123, 0.35);
+  }
+  
+  .vs {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0 10px;
+    color: var(--accent-2);
+  }
+  
+  .battle-button {
+    padding: 20px 30px;
+    font-size: 22px;
+    margin: 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .battle-button:hover {
+    background-color: #45a049;
+  }
+  
+  .vs-text {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0 20px;
+  }
+  

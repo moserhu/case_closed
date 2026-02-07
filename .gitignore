@@ -1,0 +1,29 @@
+.DS_Store
+
+# Env
+.env
+.env.*
+
+# Node
+node_modules/
+
+# Frontend builds
+frontend/.next/
+frontend/out/
+frontend/dist/
+frontend/build/
+
+# Backend builds
+backend/dist/
+backend/build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage
+coverage/
+
+# Misc
+*.log

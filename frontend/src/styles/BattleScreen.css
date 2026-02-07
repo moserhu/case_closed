@@ -1,0 +1,51 @@
+.battle-container {
+  text-align: center;
+  margin: 0;
+  max-width: none;
+  width: fit-content;
+  padding: 18px 20px;
+  background: rgba(12, 16, 26, 0.9);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  display: inline-block;
+}
+  
+.battle-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+  
+.battle-option {
+  padding: 18px 28px;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(78, 161, 255, 0.5);
+  background: linear-gradient(135deg, rgba(78, 161, 255, 0.2), rgba(24, 209, 123, 0.18));
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.battle-option:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+}
+  
+.vs-text {
+  font-size: 1.6rem;
+  margin: 0 8px;
+  color: var(--accent-2);
+  font-family: 'Barlow Condensed', sans-serif;
+}
+  
+.voted-text {
+  margin-top: 20px;
+  font-style: italic;
+  color: var(--accent-3);
+}
+  
